@@ -1212,6 +1212,8 @@ static void update_resource (flux_future_t *f, void *arg)
         flux_log_error (ctx->h, "%s: update_resource_db", __FUNCTION__);
         goto done;
     }
+    flux_log_error (ctx->h, "%s: flux_rpc_get_unpack and update_resource_db succeeded",
+                    __FUNCTION__);
     for (auto &kv : ctx->notify_msgs) {
         if ( (rc += flux_respond (ctx->h, kv.second->get_msg (), NULL)) < 0) {
             flux_log_error (ctx->h, "%s: flux_respond", __FUNCTION__);
