@@ -20,7 +20,9 @@ TESTS_ENVIRONMENT = \
     FLUX_SCHED_CO_INST=`sh -c 'if [ $(FLUX_PREFIX) = $(prefix) ]; then echo co; fi'` \
     PATH="$(FLUX_PREFIX)/bin:$(PATH)"
 
-TESTS = \
+TESTS = t0001-time-limits.t
+
+OTHERTESTS = \
     t0000-sharness.t \
     t0001-time-limits.t \
     t1001-qmanager-basic.t \
