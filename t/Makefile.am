@@ -22,6 +22,7 @@ TESTS_ENVIRONMENT = \
 
 TESTS = \
     t0000-sharness.t \
+    t0001-time-limits.t \
     t1001-qmanager-basic.t \
     t1002-qmanager-reload.t \
     t1003-qmanager-policy.t \
