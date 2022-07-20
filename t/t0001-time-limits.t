@@ -23,8 +23,11 @@ test_expect_success 'loading fluxion modules works' '
 '
 
 test_expect_success 'a job with a time limit can be scheduled and run' '
-    jobid1=$(flux mini submit -N 1 -n 1 --time-limit=5s hostname) &&
-    flux job wait-event -t 10 ${jobid1} start
+    flux mini run -N 1 -n 1 --time-limit=5s sleep 3s
+'
+
+test_expect_success 'a job exceeding a time limit exits with non-zero exit code' '
+    ! flux mini run -N 1 -n 1 --time-limit=5s sleep 13s
 '
 
 test_expect_success 'cleanup active jobs' '
