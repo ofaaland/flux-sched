@@ -34,8 +34,8 @@ test_expect_success 'time limit specified is reflected in kvs resource.R' '
     limit=30
     fudge=2
     remaining=$(flux mini run -N 1 -n 1 --time-limit=${limit}s /g/g0/faaland1/projects/flux-get-remaining-time/remaining)
-    #[[ $remaining -gte $((limit - fudge)) ]]
-    #[[ $remaining -lte $limit ]]
+    #test $remaining -ge $((limit - fudge))
+    #test $remaining -le $limit
 '
 
 test_expect_success 'cleanup active jobs' '
