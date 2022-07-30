@@ -30,6 +30,14 @@ test_expect_success 'a job exceeding a time limit exits with non-zero exit code'
     ! flux mini run -N 1 -n 1 --time-limit=5s sleep 13s
 '
 
+test_expect_success 'time limit specified is reflected in kvs resource.R' '
+    limit=30
+    fudge=2
+    remaining=$(flux mini run -N 1 -n 1 --time-limit=${limit}s /g/g0/faaland1/projects/flux-get-remaining-time/remaining)
+    #[[ $remaining -gte $((limit - fudge)) ]]
+    #[[ $remaining -lte $limit ]]
+'
+
 test_expect_success 'cleanup active jobs' '
     cleanup_active_jobs
 '
