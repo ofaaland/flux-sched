@@ -1255,6 +1255,8 @@ static int populate_resource_db_acquire (std::shared_ptr<resource_ctx_t> &ctx)
         goto done;
     }
 done:
+    flux_log (ctx->h, LOG_INFO, "%s: olaf was here", __FUNCTION__);
+
     return rc;
 }
 
