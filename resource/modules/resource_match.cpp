@@ -1213,8 +1213,8 @@ static void update_resource (flux_future_t *f, void *arg)
         goto done;
     }
 
-    flux_log (ctx->h, LOG_INFO, "%s: olaf fetched R %s",
-              __FUNCTION__, R);
+    flux_log (ctx->h, LOG_INFO, "%s: olaf fetched resources %s at %p",
+              __FUNCTION__, json_dumps (resources, 0), resources);
 
     if ( (rc = update_resource_db (ctx, resources, up, down)) < 0) {
         flux_log_error (ctx->h, "%s: update_resource_db", __FUNCTION__);
