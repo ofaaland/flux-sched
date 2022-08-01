@@ -1200,16 +1200,22 @@ static void update_resource (flux_future_t *f, void *arg)
     const char *down = NULL;
     json_t *resources = NULL;
     std::shared_ptr<resource_ctx_t> ctx = getctx ((flux_t *)arg);
+    char *R = NULL;
 
-    if ( (rc = flux_rpc_get_unpack (f, "{s?:o s?:s s?:s}",
+    if ( (rc = flux_rpc_get_unpack (f, "{s?:o s?:s s?:s s:s}",
                                            "resources", &resources,
                                            "up", &up,
-                                           "down", &down)) < 0) {
+                                           "down", &down,
+                                           "R", &R)) < 0) {
         flux_log_error (ctx->h, "%s: exiting due to resource.acquire failure",
                         __FUNCTION__);
         flux_reactor_stop (flux_get_reactor (ctx->h));
         goto done;
     }
+
+    flux_log (ctx->h, LOG_INFO, "%s: olaf fetched R %s",
+              __FUNCTION__, R);
+
     if ( (rc = update_resource_db (ctx, resources, up, down)) < 0) {
         flux_log_error (ctx->h, "%s: update_resource_db", __FUNCTION__);
         goto done;
