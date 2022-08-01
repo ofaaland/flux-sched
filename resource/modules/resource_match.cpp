@@ -1202,11 +1202,11 @@ static void update_resource (flux_future_t *f, void *arg)
     std::shared_ptr<resource_ctx_t> ctx = getctx ((flux_t *)arg);
     char *R = NULL;
 
-    if ( (rc = flux_rpc_get_unpack (f, "{s?:o s?:s s?:s s:s}",
+    if ( (rc = flux_rpc_get_unpack (f, "{s?:o s?:s s?:s}",
                                            "resources", &resources,
                                            "up", &up,
-                                           "down", &down,
-                                           "R", &R)) < 0) {
+                                           "down", &down
+                                           )) < 0) {
         flux_log_error (ctx->h, "%s: exiting due to resource.acquire failure",
                         __FUNCTION__);
         flux_reactor_stop (flux_get_reactor (ctx->h));
