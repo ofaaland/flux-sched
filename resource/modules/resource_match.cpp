@@ -1191,6 +1191,8 @@ done:
     return rc;
 }
 
+// flux kvs get resource.R | jq '.execution.expiration'
+// returns a float representing the expiration time
 static void update_resource (flux_future_t *f, void *arg)
 {
     int rc = -1;
