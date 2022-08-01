@@ -1191,8 +1191,10 @@ done:
     return rc;
 }
 
-// flux kvs get resource.R | jq '.execution.expiration'
-// returns a float representing the expiration time
+// resources below are in this format
+// {"version": 1, "execution": {"R_lite": [{"rank": "0-1", "children": {"core": "0"}}], "starttime": 1659397129.0, "expiration": 1660001929.0, "nodelist": ["fluke[6,6]"]}}
+// piping it into jq '.execution.expiration' returns the expiration time
+// 1660001929.0
 static void update_resource (flux_future_t *f, void *arg)
 {
     int rc = -1;
@@ -1255,8 +1257,6 @@ static int populate_resource_db_acquire (std::shared_ptr<resource_ctx_t> &ctx)
         goto done;
     }
 done:
-    flux_log (ctx->h, LOG_INFO, "%s: olaf was here", __FUNCTION__);
-
     return rc;
 }
 
