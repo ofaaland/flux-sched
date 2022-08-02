@@ -1216,13 +1216,9 @@ static void update_resource (flux_future_t *f, void *arg)
         goto done;
     }
 
-    if (resources) {
-        flux_log (ctx->h, LOG_INFO, "%s: olaf resources %s at %p",
-                  __FUNCTION__, json_dumps (resources, 0), resources);
-
-        if (json_unpack (resources, "{s:{s:f}}", "execution", "expiration", &expiration) == 0) {
+    if (resources && json_unpack (resources, "{s:{s:f}}", "execution",
+        "expiration", &expiration) == 0) {
             flux_log (ctx->h, LOG_INFO, "%s: olaf expiration %f", __FUNCTION__, expiration);
-        }
     }
 
     if ( (rc = update_resource_db (ctx, resources, up, down)) < 0) {
